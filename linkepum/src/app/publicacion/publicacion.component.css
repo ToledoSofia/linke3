@@ -1,0 +1,86 @@
+/* publicacion.component.css */
+.post-container {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #fff;
+  max-width: 600px; 
+  margin: auto; 
+}
+.post-image img {
+  width: 95%; 
+  height: auto;
+  max-width: 100%; 
+}
+.post-content {
+  margin-top: 16px;
+
+}
+.post-image {
+  width: 100%; 
+  overflow: hidden; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+  
+  .post-header {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+  }
+  
+  .profile-pic {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .post-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .username {
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .post-date {
+    font-size: 16px;
+    color: gray;
+  }
+  
+  
+  .post-text {
+    margin-left: 16px;
+    font-size: 20px;
+  }
+  
+  .post-actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    border-top: 1px solid #eaeaea;
+  }
+  
+  .action-btn {
+    background-color: transparent;
+    border: none;
+    color: #3b5998;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  
+  .action-btn i {
+    margin-right: 5px;
+  }
+  
+  .action-btn:hover {
+    color: #1a73e8;
+  }
+  

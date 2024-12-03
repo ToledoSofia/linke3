@@ -1,0 +1,18 @@
+<div class="edit-profile-container">
+    <form (ngSubmit)="onSubmit()" #editForm="ngForm">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" [(ngModel)]="musico.nombre" name="nombre" required>
+  
+      <label for="apellido">Apellido:</label>
+      <input type="text" id="apellido" [(ngModel)]="musico.apellido" name="apellido" required>
+  
+      <label for="ubicacion">Ubicación:</label>
+      <input type="text" id="ubicacion" [(ngModel)]="musico.ubicacion" name="ubicacion" required>
+  
+      <label for="descripcion">Descripción:</label>
+      <textarea id="descripcion" [(ngModel)]="musico.descripcion" name="descripcion" required></textarea>
+  
+      <button class=" btn btn-primary"type="submit">Guardar</button>
+    </form>
+  </div>
+  

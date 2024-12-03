@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Selecciona y recorta tu imagen</h2>
+<mat-dialog-content>
+  <input type="file" (change)="fileChangeEvent($event)" />
+  <div *ngIf="imageChangedEvent">
+    <img id="image" style="max-width: 100%;" />
+    <button (click)="cropImage()">Recortar Imagen</button>
+  </div>
+</mat-dialog-content>

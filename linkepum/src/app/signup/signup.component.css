@@ -1,0 +1,41 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: inherit;
+}
+
+.login-card {
+  width: 400px;
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
+}
+
+#btnLog{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.mat-form-field input.invalid {
+  border-color: red;
+}
+
+
+
+.error{
+  color:red;
+}
+
+mat-error {
+  color: red;
+  font-size: 14px;
+  display: block; 
+}
+mat-form-field .mat-input-element.invalid {
+  border-color: red;
+}
+
+mat-error {
+  color: red;
+}

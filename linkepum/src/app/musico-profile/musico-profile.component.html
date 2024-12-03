@@ -1,0 +1,79 @@
+
+ <div class="contenedor" style="height: 100%; width: 100%;">
+  <div *ngIf="musico" class="linkedin-profile">
+    <div class="header-section">
+        <img class="cover-photo" [src]="musico.foto_portada ? musico.foto_portada : 'https://via.placeholder.com/1500x400' " alt="Cover Photo"  (click)="changeCoverPhoto()">>
+        <div class="profile-picture" >
+            <img [src]="musico.foto_perfil ? musico.foto_perfil : 'https://via.placeholder.com/1500x400'" alt="Profile Picture"  (click)="changeProfilePhoto()">
+        </div>
+        <div class="profile-details">
+          <h1>
+            <div class="row" id="nombre-usuario">
+              <div class="col-12">
+                {{ musico.nombre }} {{ musico.apellido }}
+              </div>
+            </div>
+            <div class="row" id="nombre-usuario" style="padding-bottom: 5%;">
+              <div class="col-12">
+                <span class="username" style="color: gray; font-size: smaller; font-weight: lighter;">  &#64;{{ musico.usuario }}</span>
+              </div>
+            </div>
+          </h1>
+          <p>{{musico.ubicacion}} | 500+ connections</p>
+          <p>Instrumentos: {{ instrumentos.join(' - ') }}</p>
+          <div class="action-buttons" >
+            <button class="btn connect-btn">Solicitar</button>
+            <div class="action-buttons" *ngIf="isCurrentUser()"> 
+              <button (click)="updateProfile()" class="btn editar-btn">Editar</button>
+          </div>
+          </div>
+        </div>
+    </div>
+    <div class="summary-section">
+      <div class="row">
+        <div class="col-6">
+          <h3 style="display: flex; justify-content: center;">About</h3>
+          <p>
+            {{ musico.descripcion }}
+          </p>
+        </div>
+        <div class="col-6">
+          <div >
+            <h3 style="display: flex; justify-content: center; width: 20%; float: left;">Grupos</h3>
+            <button mat-fab color="primary" style="float: right;" (click)="navigateToCreateGroup()" >+</button>
+          </div>
+          <div class="grupos-container">
+     
+            <div *ngIf="grupos.length === 0">No se encontraron grupos asociados.</div>
+            <div class="grupos-scrollable-container" *ngIf="grupos.length > 0">
+              <div *ngFor="let grupo of grupos" class="grupo-card">
+                <div class="grupo-card-body">
+                  <h5>{{ grupo.nombre }}</h5>
+                  <p>{{ grupo.descripcion || 'Sin descripción disponible' }}</p>
+                  <div class="grupo-status" [ngClass]="{ 'activo': grupo.activo, 'inactivo': !grupo.activo }">
+                    {{ grupo.activo ? 'Activo' : 'Inactivo' }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+
+        </div>
+      </div>
+    </div>
+    <div style="display: flex; align-items:center; justify-content: right;" *ngIf="isCurrentUser()">
+      <button (click)="deleteAccount()" class="btn delete-btn">Delete Account</button>
+      <button (click)="logout()" class="btn sesion-btn">Cerrar Sesion</button>
+
+    </div>
+   
+  </div>
+  <div *ngIf="!musico">
+    <p>Cargando datos del usuario...</p>
+  </div>
+
+
+
+</div>
+

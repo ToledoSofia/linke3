@@ -1,0 +1,12 @@
+/* feed.component.css */
+#contenedor {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* Espaciado entre publicaciones */
+    padding: 16px; /* Espaciado alrededor del contenedor */
+  }
+  
+  #publicaciones {
+    width: 100%; /* Asegúrate de que ocupe el ancho completo del contenedor */
+  }
+  

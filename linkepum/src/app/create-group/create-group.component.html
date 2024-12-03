@@ -1,0 +1,27 @@
+<form [formGroup]="grupoForm" (ngSubmit)="crearGrupo()">
+  <label>Nombre del Grupo:</label>
+  <input formControlName="nombreGrupo" />
+
+  <label>Descripción:</label>
+  <input formControlName="descripcion" />
+
+  <label>Ubicación:</label>
+  <input formControlName="ubicacion" />
+
+  <label>Fecha de Creación:</label>
+  <input type="date" formControlName="fechaCreacion" />
+
+  <label for="instrumento">Instrumento:</label>
+  <select formControlName="instrumentoId" id="instrumento">
+    <option *ngFor="let instrumento of instrumentos" [value]="instrumento.idInstrumento">
+      {{ instrumento.nombre }}
+    </option>
+  </select>
+
+  <label>Rol:</label>
+  <select formControlName="rol">
+    <option *ngFor="let rol of roles" [value]="rol">{{ rol }}</option>
+  </select>
+
+  <button type="submit">Crear Grupo</button>
+</form>

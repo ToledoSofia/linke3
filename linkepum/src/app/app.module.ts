@@ -24,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CreateGroupComponent } from './create-group/create-group.component';
 import { MatSelectModule } from '@angular/material/select'; 
 import { MatOptionModule } from '@angular/material/core';
+import { AddInstrumentDialogComponent } from './add-instrument-dialog/add-instrument-dialog.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { MatOptionModule } from '@angular/material/core';
     ImageCropperDialogComponent,
     PublicacionComponent,
     UserCardsComponent,
-    CreateGroupComponent
+    CreateGroupComponent,
+    AddInstrumentDialogComponent
   ],
   imports: [
     BrowserModule,

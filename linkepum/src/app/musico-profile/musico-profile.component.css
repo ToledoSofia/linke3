@@ -174,3 +174,32 @@ body {
 #nombre-usuario {
     height: 5vh;
 }
+
+.instrumento-card-body {
+    display: flex;
+    justify-content: space-between; /* Alinea el contenido a los extremos */
+    align-items: center; /* Alinea verticalmente los elementos */
+  }
+  
+  .instrumento-header {
+    display: flex;
+    justify-content: space-between; /* Alinea el nombre y el botón en los extremos */
+    width: 100%; /* Asegura que ocupe todo el ancho disponible */
+  }
+  
+  .instrumento-header h3 {
+    margin: 0; /* Elimina márgenes por defecto para alinear bien */
+  }
+  
+  button {
+    padding: 5px 10px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  

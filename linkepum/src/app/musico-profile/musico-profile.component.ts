@@ -8,6 +8,8 @@
   import { isPlatformBrowser } from '@angular/common';
   import { EditProfileComponent } from '../edit-profile/edit-profile.component';
   import { ImageCropperDialogComponent } from '../image-cropper-dialog/image-cropper-dialog.component';
+  import { AddInstrumentDialogComponent } from '../add-instrument-dialog/add-instrument-dialog.component';
+
 
 
 
@@ -19,7 +21,8 @@
   export class MusicoProfileComponent  implements OnInit {
     musico: any;
     private isBrowser: boolean;
-    instrumentos: string[] = [];
+    instrumentos: any[] = [];
+
     currentUserId: number | null = null; 
     grupos : any[] = [];
 
@@ -41,6 +44,7 @@
       return this.musico && this.musico.idMusico === this.currentUserId;
     }
     
+ 
 
     getUserData(): void {
       if (this.isBrowser) { 
@@ -95,9 +99,30 @@
         }
       });
     }
+    openAddInstrumentDialog() {
+      const dialogRef = this.dialog.open(AddInstrumentDialogComponent);
+    
+      dialogRef.afterClosed().subscribe((result) => {
+        if (result) {
+          this.associateInstrument(result.idInstrumento || result);
+        }
+      });
+    }
+    associateInstrument(instrumentoId: number) {
+      const token = localStorage.getItem('token');
+      if (token) {
+        console.log("ENTra");
+        const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+        this.http
+        .post(`http://localhost:3000/musico/${this.currentUserId}/instrumentos`, { idInstrumento: instrumentoId }, { headers })
+        .subscribe(
+            () => this.getInstrumentos(),
+            (error) => console.error('Error al asociar instrumento', error)
+          );
+      }
+    }    
 
     navigateToCreateGroup() {
-      console.log("netrafkdfh");
       this.router.navigate(['/create-group']);
     }
 
@@ -133,26 +158,29 @@
       });
     }
 
-    
     getGrupos(): void {
       const token = localStorage.getItem('token');
-
+  
       if (token) {
-        const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-        this.http.get<any[]>(`http://localhost:3000/musico/${this.currentUserId}/grupos`, { headers })
-          .subscribe(
-            (data) => {
-              this.grupos = data; 
-              console.log('Grupos del usuario:', this.grupos);
-            },
-            (error) => {
-              console.error('Error al obtener los grupos del usuario:', error);
-            }
-          );
+          const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+          this.http.get<any[]>(`http://localhost:3000/musico/${this.currentUserId}/grupos`, { headers })
+              .subscribe(
+                  (data) => {
+                      this.grupos = data.map(grupo => ({
+                          ...grupo,
+                          activo: grupo.GruposMusicos?.activo || 0, // Asegurar campo activo
+                      }));
+                      console.log('Grupos del usuario:', this.grupos);
+                  },
+                  (error) => {
+                      console.error('Error al obtener los grupos del usuario:', error);
+                  }
+              );
       } else {
-        console.error('No se encontró un token en el localStorage');
+          console.error('No se encontró un token en el localStorage');
       }
-    }
+  }
+  
 
 
     uploadPhoto(imageUrl: string, photoType: string): void {
@@ -176,8 +204,8 @@
 
     getInstrumentos(): void {
       if (this.musico && this.musico.idMusico) {
-        this.authService.getInstrumentos(this.musico.idMusico).subscribe(
-          (data: { instrumentos: string[] }) => {
+        this.authService.getInstrumentos2(this.musico.idMusico).subscribe(
+          (data: { instrumentos: any[] }) => {
             this.instrumentos = data.instrumentos;
             console.log('Instrumentos:', this.instrumentos); 
           },
@@ -185,6 +213,27 @@
             console.error('Error al obtener los instrumentos', error);
           }
         );
+        
       }
     }
+
+    eliminarInstrumento(idInstrumento: number): void {
+      const token = localStorage.getItem('token');
+      if (token) {
+          const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+          this.http
+              .delete(`http://localhost:3000/musico/${this.currentUserId}/instrumentos/${idInstrumento}`, { headers })
+              .subscribe(
+                  (response) => {
+                      console.log('Relación eliminada:', response);
+                      this.getInstrumentos();  // Actualizar la lista de instrumentos
+                  },
+                  (error) => {
+                      console.error('Error al eliminar la relación:', error);
+                  }
+              );
+      }
+  }
+  
+    
   }

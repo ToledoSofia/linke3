@@ -20,7 +20,7 @@
             </div>
           </h1>
           <p>{{musico.ubicacion}} | 500+ connections</p>
-          <p>Instrumentos: {{ instrumentos.join(' - ') }}</p>
+          <!-- <p>Instrumentos: {{ instrumentos.join(' - ') }}</p> -->
           <div class="action-buttons" >
             <button class="btn connect-btn">Solicitar</button>
             <div class="action-buttons" *ngIf="isCurrentUser()"> 
@@ -36,27 +36,46 @@
           <p>
             {{ musico.descripcion }}
           </p>
+
+          <!-- <h3 style="display: flex; justify-content: center;">Instrumentos</h3> -->
+
+          <button mat-fab color="primary" style="float: right;" (click)="openAddInstrumentDialog()">+</button>
+          <br><br><br>
+          <div *ngIf="instrumentos.length === 0">No se encontraron instrumentos asociados.</div>
+          <div class="instrumentos-scrollable-container" *ngIf="instrumentos.length > 0">
+            <div *ngFor="let instrumento of instrumentos" class="instrumento-card">
+              <div class="instrumento-card-body">
+                <div class="instrumento-header">
+                  <h3 (click)="eliminarInstrumento(instrumento.idInstrumento)">{{ instrumento.nombre }}</h3>
+                  <button>rate</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
         </div>
         <div class="col-6">
           <div >
             <h3 style="display: flex; justify-content: center; width: 20%; float: left;">Grupos</h3>
             <button mat-fab color="primary" style="float: right;" (click)="navigateToCreateGroup()" >+</button>
+            <br><br>
+          
           </div>
           <div class="grupos-container">
-     
             <div *ngIf="grupos.length === 0">No se encontraron grupos asociados.</div>
             <div class="grupos-scrollable-container" *ngIf="grupos.length > 0">
-              <div *ngFor="let grupo of grupos" class="grupo-card">
-                <div class="grupo-card-body">
-                  <h5>{{ grupo.nombre }}</h5>
-                  <p>{{ grupo.descripcion || 'Sin descripción disponible' }}</p>
-                  <div class="grupo-status" [ngClass]="{ 'activo': grupo.activo, 'inactivo': !grupo.activo }">
-                    {{ grupo.activo ? 'Activo' : 'Inactivo' }}
-                  </div>
+                <div *ngFor="let grupo of grupos" class="grupo-card">
+                    <div class="grupo-card-body">
+                        <h5>{{ grupo.nombre }}</h5>
+                        <p>{{ grupo.descripcion || 'Sin descripción disponible' }}</p>
+                        <div class="grupo-status" [ngClass]="{ 'activo': grupo.activo, 'inactivo': !grupo.activo }">
+                            {{ grupo.activo ? 'Activo' : 'Inactivo' }}
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
+            
           
 
         </div>

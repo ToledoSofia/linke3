@@ -57,6 +57,13 @@ export class AuthService {
   getInstrumentos(musicoId: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/musico/${musicoId}/instrumentos`);
   }
+  getInstrumentos2(musicoId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/musico/${musicoId}/instrumentos2`);
+  }
+  getAllInstrumentos(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/instrumentos`);
+    
+  }
 
   checkGroupExists(username: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/checkGroupExists`, { username });

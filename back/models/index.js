@@ -5,6 +5,7 @@ const sequelize = require('../config/database');
 const Musico = require('./musico');
 const Grupos = require('./grupos');
 const GruposMusicos = require('./gruposMusicos');
+const MusicoInstrumento = require('./musicoInstrumento');
 
 const Instrumento = require('./instrumento');
 
@@ -22,16 +23,17 @@ Grupos.belongsToMany(Musico, {
 });
 
 Musico.belongsToMany(Instrumento, {
-    through: 'musico_instrumento',
+    through: MusicoInstrumento,
     foreignKey: 'Musico_idMusico',
     otherKey: 'Instrumento_idInstrumento',
 });
 
 Instrumento.belongsToMany(Musico, {
-    through: 'musico_instrumento',
+    through: MusicoInstrumento,
     foreignKey: 'Instrumento_idInstrumento',
     otherKey: 'Musico_idMusico',
 });
+
 
 // Exportar modelos y Sequelize
 module.exports = {
@@ -40,4 +42,5 @@ module.exports = {
     Grupos,
     GruposMusicos,
     Instrumento,
+    MusicoInstrumento,
 };

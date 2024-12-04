@@ -22,14 +22,6 @@ const Grupos = sequelize.define('Grupos', {
     ubicacion: {
         type: DataTypes.STRING(100),
     },
-    usuario: {
-        type: DataTypes.STRING(50),
-        allowNull: false,
-    },
-    contrasena: {
-        type: DataTypes.STRING(100),
-        allowNull: false,
-    },
 }, {
     tableName: 'Grupos',
     timestamps: false,

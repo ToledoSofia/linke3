@@ -6,6 +6,8 @@ import { MusicoProfileComponent } from './musico-profile/musico-profile.componen
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { FeedComponent } from './feed/feed.component';
 import { CreateGroupComponent } from './create-group/create-group.component'; 
+import { UserCardsComponent } from './user-cards/user-cards.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent }, 
@@ -14,6 +16,10 @@ const routes: Routes = [
   { path: 'musico-profile', component: MusicoProfileComponent },
   { path: 'feed', component: FeedComponent },
   { path: 'create-group', component: CreateGroupComponent }, 
+  { path: 'usuarios', component: UserCardsComponent }, 
+  { path: 'perfil/:id', component: UserProfileComponent }, 
+
+
 
 ];
 

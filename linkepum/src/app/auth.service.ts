@@ -65,6 +65,7 @@ export class AuthService {
     
   }
 
+
   checkGroupExists(username: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/checkGroupExists`, { username });
   }

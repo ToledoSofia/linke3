@@ -1,9 +1,6 @@
-<div class="card-container">
-    <div *ngFor="let item of items" class="card">
-      <h3>{{ item.nombre }}</h3>
-      <p>{{ item.descripcion }}</p>
-      <p><strong>Ubicación:</strong> {{ item.ubicacion }}</p>
-      <img *ngIf="type === 'musicos'" [src]="item.foto_perfil" alt="Profile Image" class="profile-img" />
-    </div>
-  </div>
-  
+<div *ngFor="let item of items" class="card" (click)="navigateToProfile(item.idMusico)">
+  <h3>{{ item.nombre }}</h3>
+  <p>{{ item.descripcion }}</p>
+  <p><strong>Ubicación:</strong> {{ item.ubicacion }}</p>
+  <img *ngIf="type === 'musicos'" [src]="item.foto_perfil" alt="Profile Image" class="profile-img" />
+</div>

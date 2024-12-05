@@ -1,0 +1,66 @@
+<div class="contenedor" style="height: 100%; width: 100%;">
+    <div *ngIf="userData" class="linkedin-profile">
+      <div class="header-section">
+        <img class="cover-photo" [src]="userData.foto_portada ? userData.foto_portada : 'https://via.placeholder.com/1500x400'" alt="Cover Photo">
+        <div class="profile-picture">
+          <img [src]="userData.foto_perfil ? userData.foto_perfil : 'https://via.placeholder.com/150'" alt="Profile Picture">
+        </div>
+        <div class="profile-details">
+          <h1>
+            <div class="row" id="nombre-usuario">
+              <div class="col-12">
+                {{ userData.nombre }}
+              </div>
+            </div>
+            <div class="row" id="nombre-usuario" style="padding-bottom: 5%;">
+              <div class="col-12">
+                <span class="username" style="color: gray; font-size: smaller; font-weight: lighter;">&#64;{{ userData.usuario }}</span>
+              </div>
+            </div>
+          </h1>
+          <p>{{ userData.ubicacion }} | {{ grupos.length }} grupos</p>
+        </div>
+      </div>
+      <div class="summary-section">
+        <div class="row">
+          <div class="col-6">
+            <h3 style="display: flex; justify-content: center;">About</h3>
+            <p>{{ userData.descripcion || 'Sin descripción disponible' }}</p>
+            <h3 style="display: flex; justify-content: center;">Instrumentos</h3>
+            <br><br>
+            <div *ngIf="instrumentos.length === 0">No se encontraron instrumentos asociados.</div>
+            <div class="instrumentos-scrollable-container" *ngIf="instrumentos.length > 0">
+              <div *ngFor="let instrumento of instrumentos" class="instrumento-card">
+                <div class="instrumento-card-body">
+                  <div class="instrumento-header">
+                    <h3>{{ instrumento.nombre }}</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <h3 style="display: flex; justify-content: center;">Grupos</h3>
+            <div class="grupos-container">
+              <div *ngIf="grupos.length === 0">No se encontraron grupos asociados.</div>
+              <div class="grupos-scrollable-container" *ngIf="grupos.length > 0">
+                <div *ngFor="let grupo of grupos" class="grupo-card">
+                  <div class="grupo-card-body">
+                    <h5>{{ grupo.nombre }}</h5>
+                    <p>{{ grupo.descripcion || 'Sin descripción disponible' }}</p>
+                    <div class="grupo-status" [ngClass]="{ 'activo': grupo.activo, 'inactivo': !grupo.activo }">
+                      {{ grupo.activo ? 'Activo' : 'Inactivo' }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!userData">
+      <p>Cargando datos del usuario...</p>
+    </div>
+  </div>
+  

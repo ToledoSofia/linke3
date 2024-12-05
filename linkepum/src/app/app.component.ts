@@ -26,7 +26,10 @@ export class AppComponent {
     this.router.navigate(['/feed']);
   }
 
- 
+  navigateToUsuarios(): void {
+    this.router.navigate(['/usuarios']); // Redirige a la ruta configurada
+  }
+  
   ngOnInit(): void {
     this.apiService.getData('musicos').subscribe((data) => {
       this.message = data.message;

@@ -124,7 +124,7 @@
             res.status(500).json({ error: 'Hubo un problema al obtener los instrumentos del músico.' });
         }
     });
-    
+
     app.delete('/musico/:idMusico/instrumentos/:idInstrumento', async (req, res) => {
         const { idMusico, idInstrumento } = req.params;  // Extraer los parámetros del ID del músico e instrumento
     
@@ -150,6 +150,22 @@
             res.status(500).json({ error: 'Hubo un problema al eliminar la relación.' });
         }
     });
+    app.get('/api/usuarios/:id', async (req, res) => {
+        const userId = req.params.id;
+        console.log(userId);
+      
+        try {
+          const user = await Musico.findByPk(userId);
+          if (!user) {
+            return res.status(404).json({ error: 'Usuario no encontrado' });
+          }
+          res.status(200).json(user);
+        } catch (error) {
+          console.error('Error al obtener el usuario:', error);
+          res.status(500).json({ error: 'Hubo un problema al obtener el usuario.' });
+        }
+      });
+      
     
     
     app.get('/musico/:id/instrumentos', async (req, res) => {
